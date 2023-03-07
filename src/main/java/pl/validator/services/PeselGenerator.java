@@ -9,6 +9,7 @@ public interface PeselGenerator {
     String generatePesel(int monthStart, int monthEnd, int yearStart, int yearEnd);
 
     String generatePesel(int dayStart, int dayEnd, int monthStart, int monthEnd, int yearStart, int yearEnd);
+    String generatePesel(int dayStart, int dayEnd, int monthStart, int monthEnd, int yearStart, int yearEnd, Sex gender);
 
     String generatePeselWithRandomDateAndGender();
 
@@ -18,10 +19,10 @@ public interface PeselGenerator {
 
     String generatePeselWithGenderAndRandomDate(Sex sex);
 
-    String generatePeselWithGenderAndYear(Sex sex);
+    String generatePeselWithYearAndGender(int yearStart, int yearEnd, Sex sex);
 
-    String generatePeselWithGenderAndMonth(Sex sex);
+    String generatePeselWithMonthAndGender(int monthStart, int monthEnd, Sex sex);
 
-    String generatePeselWithGenderDayMonthAndYear(Sex sex, int dayStart, int dayEnd, int monthStart, int MonthEnd, int yearStart, int yearEnd);
+    String generatePeselWithDayAndGender(int dayStart, int dayEnd, Sex sex);
 
 }

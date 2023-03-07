@@ -1,6 +1,7 @@
 package pl.validator;
 
 import pl.validator.enums.PeselGeneratorType;
+import pl.validator.model.Sex;
 import pl.validator.services.PersonParser;
 import pl.validator.services.PersonParserImpl;
 import pl.validator.services.PeselGenerator;
@@ -21,7 +22,7 @@ public class Main {
 
         List<String> peselData = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            peselData.add(generator2.generatePeselWithRandomYearMonthAndGender(1, 5));
+            peselData.add(generator1.generatePeselWithYearAndGender(88, 91, Sex.MALE));
         }
 
         peselData.forEach(pesel -> System.out.println(parser.getPerson(pesel).get()));

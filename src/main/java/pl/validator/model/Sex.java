@@ -1,5 +1,5 @@
 package pl.validator.model;
 
 public enum Sex {
-    FEMALE, MALE
+    FEMALE, MALE, UNKNOWN
 }

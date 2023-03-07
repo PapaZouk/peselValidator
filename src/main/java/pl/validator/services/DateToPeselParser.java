@@ -27,11 +27,7 @@ public class DateToPeselParser {
                 ? "0" + String.valueOf(date.getDayOfMonth())
                 : String.valueOf(date.getDayOfMonth());
         String serialNum = generateSerialNum();
-        String sex = Sex.MALE.equals(gender)
-                ? generateSex(1)
-                : Sex.FEMALE.equals(gender)
-                    ? generateSex(2)
-                    : generateSex(0);
+        String sex = generateSex(gender);
         String controlNum = generateControlNum(year, month, day, serialNum, sex);
 
         return year + month + day + serialNum + sex + controlNum;
@@ -55,7 +51,7 @@ public class DateToPeselParser {
                 ? "0" + String.valueOf(date.getDayOfMonth())
                 : String.valueOf(date.getDayOfMonth());
         String serialNum = generateSerialNum();
-        String sex = generateSex(0);
+        String sex = generateSex(Sex.UNKNOWN);
         String controlNum = generateControlNum(year, month, day, serialNum, sex);
 
         return year + month + day + serialNum + sex + controlNum;
@@ -65,20 +61,25 @@ public class DateToPeselParser {
         return String.valueOf(random.nextInt(100, 1000));
     }
 
-    private static String generateSex(int gender) {
+    private static String generateSex(Sex gender) {
         int genderNum = random.nextInt(0, 10);
-        if (gender == 1) {
-            if (genderNum % 2 == 0) {
-                return String.valueOf(genderNum);
-            }
-            generateSex(1);
-        } else if (gender == 2) {
+        if (Sex.MALE.equals(gender)) {
             if (genderNum % 2 != 0) {
                 return String.valueOf(genderNum);
+            } else {
+                return generateSex(gender);
             }
-            generateSex(2);
+        } else if (Sex.FEMALE.equals(gender)) {
+            if (genderNum % 2 == 0) {
+                return String.valueOf(genderNum);
+            } else {
+                return generateSex(gender);
+            }
+        } else if (Sex.UNKNOWN.equals(gender)) {
+            return String.valueOf(genderNum);
+        } else {
+            throw new IllegalArgumentException("Unknown gender type");
         }
-        return String.valueOf(genderNum);
     }
 
     private static String generateControlNum(String year, String month, String day, String serialNum, String sex) {

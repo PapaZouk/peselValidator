@@ -9,16 +9,56 @@ public class PeselGeneratorMillenium implements PeselGenerator {
     private static final PeselValidator validator = new PeselValidatorImpl();
     @Override
     public String generatePesel(int yearStart, int yearEnd) {
-        return generatePesel(1, 31, 1, 12, yearStart, yearEnd);
+        return generatePesel(1, 31, 1, 12, yearStart, yearEnd, Sex.UNKNOWN);
     }
 
     @Override
     public String generatePesel(int monthStart, int monthEnd, int yearStart, int yearEnd) {
-        return generatePesel(1, 31, monthStart, monthEnd, yearStart, yearEnd);
+        return generatePesel(1, 31, monthStart, monthEnd, yearStart, yearEnd, Sex.UNKNOWN);
     }
 
     @Override
     public String generatePesel(int dayStart, int dayEnd, int monthStart, int monthEnd, int yearStart, int yearEnd) {
+       return generatePesel(dayStart, dayEnd, monthStart, monthEnd, yearStart, yearEnd, Sex.UNKNOWN);
+    }
+
+    @Override
+    public String generatePeselWithRandomDateAndGender() {
+        return generatePesel(1, 31, 1, 12, 0, 99, Sex.UNKNOWN);
+    }
+
+    @Override
+    public String generatePeselWithRandomYearMonthAndGender(int dayStart, int dayEnd) {
+        return generatePesel(dayStart, dayEnd, 1, 12, 0, 99, Sex.UNKNOWN);
+    }
+
+    @Override
+    public String generatePeselWithRandomYearDayAndGender(int monthStart, int monthEnd) {
+        return generatePesel(1, 31, monthStart, monthEnd, 0, 99, Sex.UNKNOWN);
+    }
+
+    @Override
+    public String generatePeselWithGenderAndRandomDate(Sex sex) {
+        return generatePesel(1, 31, 1, 12, 0, 99, sex);
+    }
+
+    @Override
+    public String generatePeselWithYearAndGender(int yearStart, int yearEnd, Sex sex) {
+        return generatePesel(1, 31, 1, 12, yearStart, yearEnd, sex);
+    }
+
+    @Override
+    public String generatePeselWithMonthAndGender(int monthStart, int monthEnd, Sex sex) {
+        return generatePesel(1, 31, monthStart, monthEnd, 0, 99, sex);
+    }
+
+    @Override
+    public String generatePeselWithDayAndGender(int dayStart, int dayEnd, Sex sex) {
+        return generatePesel(dayStart, dayEnd, 1, 12, 0, 99, sex);
+    }
+
+    @Override
+    public String generatePesel(int dayStart, int dayEnd, int monthStart, int monthEnd, int yearStart, int yearEnd, Sex gender) {
         if (yearStart < 0 || yearEnd > 99) {
             throw new IllegalArgumentException("Illegal boundaries. Year start must be > 0 and year end <= 99");
         }
@@ -37,7 +77,7 @@ public class PeselGeneratorMillenium implements PeselGenerator {
                 yearStart,
                 yearEnd + 1,
                 PeselGeneratorType.TWENTY_FIRST_CENTURY);
-        String PESEL = DateToPeselParser.parseDateToPesel(date, PeselGeneratorType.TWENTY_FIRST_CENTURY);
+        String PESEL = DateToPeselParser.parseDateToPesel(date, PeselGeneratorType.TWENTY_FIRST_CENTURY, gender);
 
         if (!validator.validatePESEL(PESEL)) {
             generatePesel(monthStart, monthEnd, yearStart, yearEnd);
@@ -45,38 +85,4 @@ public class PeselGeneratorMillenium implements PeselGenerator {
         return PESEL;
     }
 
-    @Override
-    public String generatePeselWithRandomDateAndGender() {
-        return generatePesel(1, 31, 1, 12, 0, 99);
-    }
-
-    @Override
-    public String generatePeselWithRandomYearMonthAndGender(int dayStart, int dayEnd) {
-        return generatePesel(dayStart, dayEnd, 1, 12, 0, 99);
-    }
-
-    @Override
-    public String generatePeselWithRandomYearDayAndGender(int monthStart, int monthEnd) {
-        return generatePesel(1, 31, monthStart, monthEnd, 0, 99);
-    }
-
-    @Override
-    public String generatePeselWithGenderAndRandomDate(Sex sex) {
-        return null;
-    }
-
-    @Override
-    public String generatePeselWithGenderAndYear(Sex sex) {
-        return null;
-    }
-
-    @Override
-    public String generatePeselWithGenderAndMonth(Sex sex) {
-        return null;
-    }
-
-    @Override
-    public String generatePeselWithGenderDayMonthAndYear(Sex sex, int dayStart, int dayEnd, int monthStart, int MonthEnd, int yearStart, int yearEnd) {
-        return null;
-    }
 }
