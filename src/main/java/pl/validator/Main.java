@@ -22,7 +22,7 @@ public class Main {
 
         List<String> peselData = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            peselData.add(generator1.generatePeselWithYearAndGender(88, 91, Sex.MALE));
+            peselData.add(generator1.generatePesel(1,1,4,4,88,88,Sex.MALE));
         }
 
         peselData.forEach(pesel -> System.out.println(parser.getPerson(pesel).get()));

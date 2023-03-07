@@ -26,7 +26,11 @@ public class DateToPeselParser {
         String day = String.valueOf(date.getDayOfMonth()).length() == 1
                 ? "0" + String.valueOf(date.getDayOfMonth())
                 : String.valueOf(date.getDayOfMonth());
-        String serialNum = generateSerialNum();
+        String serial = generateSerialNum();
+        String serialNum = serial.length() < 3
+                ? serial.length() == 2
+                ? ("0" + serial) : ("00" + serial)
+                : serial;
         String sex = generateSex(gender);
         String controlNum = generateControlNum(year, month, day, serialNum, sex);
 
@@ -34,31 +38,11 @@ public class DateToPeselParser {
     }
 
     public static String parseDateToPesel(LocalDate date, PeselGeneratorType generatorType) {
-
-        String year = String.valueOf(date.getYear()).substring(2);
-
-        int monthValue = date.getMonthValue();
-        if (PeselGeneratorType.TWENTY_FIRST_CENTURY.equals(generatorType)) {
-            monthValue += 20;
-        } else if (PeselGeneratorType.NINETEENTH_CENTURY.equals(generatorType)) {
-            monthValue += 80;
-        }
-
-        String month = String.valueOf(monthValue).length() == 1
-                ? "0" + String.valueOf(date.getMonthValue())
-                : String.valueOf(monthValue);
-        String day = String.valueOf(date.getDayOfMonth()).length() == 1
-                ? "0" + String.valueOf(date.getDayOfMonth())
-                : String.valueOf(date.getDayOfMonth());
-        String serialNum = generateSerialNum();
-        String sex = generateSex(Sex.UNKNOWN);
-        String controlNum = generateControlNum(year, month, day, serialNum, sex);
-
-        return year + month + day + serialNum + sex + controlNum;
+        return parseDateToPesel(date, generatorType, Sex.UNKNOWN);
     }
 
     private static String generateSerialNum() {
-        return String.valueOf(random.nextInt(100, 1000));
+        return String.valueOf(random.nextInt(0, 1000));
     }
 
     private static String generateSex(Sex gender) {
