@@ -13,39 +13,49 @@ public class DateToPeselParser {
     public static String parseDateToPesel(LocalDate date, PeselGeneratorType generatorType, Sex gender) {
         String year = String.valueOf(date.getYear()).substring(2);
 
-        int monthValue = date.getMonthValue();
+        String month = getMonth(checkCentury(generatorType, date.getMonthValue()));
+        String day = getDay(date);
+        String serial = generateSerialNum();
+        String sex = generateSex(gender);
+        String controlNum = generateControlNum(year, month, day, serial, sex);
+
+        return year + month + day + serial + sex + controlNum;
+    }
+
+    protected static int checkCentury(PeselGeneratorType generatorType, int monthValue) {
         if (PeselGeneratorType.TWENTY_FIRST_CENTURY.equals(generatorType)) {
             monthValue += 20;
         } else if (PeselGeneratorType.NINETEENTH_CENTURY.equals(generatorType)) {
             monthValue += 80;
         }
+        return monthValue;
+    }
 
-        String month = String.valueOf(monthValue).length() == 1
-                ? "0" + String.valueOf(date.getMonthValue())
+    protected static String getMonth(int monthValue) {
+        return String.valueOf(monthValue).length() == 1
+                ? "0" + String.valueOf(monthValue)
                 : String.valueOf(monthValue);
-        String day = String.valueOf(date.getDayOfMonth()).length() == 1
+    }
+
+    protected static String getDay(LocalDate date) {
+        return String.valueOf(date.getDayOfMonth()).length() == 1
                 ? "0" + String.valueOf(date.getDayOfMonth())
                 : String.valueOf(date.getDayOfMonth());
-        String serial = generateSerialNum();
-        String serialNum = serial.length() < 3
-                ? serial.length() == 2
-                ? ("0" + serial) : ("00" + serial)
-                : serial;
-        String sex = generateSex(gender);
-        String controlNum = generateControlNum(year, month, day, serialNum, sex);
-
-        return year + month + day + serialNum + sex + controlNum;
     }
 
     public static String parseDateToPesel(LocalDate date, PeselGeneratorType generatorType) {
         return parseDateToPesel(date, generatorType, Sex.UNKNOWN);
     }
 
-    private static String generateSerialNum() {
-        return String.valueOf(random.nextInt(0, 1000));
+    protected static String generateSerialNum() {
+        String serial = String.valueOf(random.nextInt(0, 1000));
+        return serial.length() < 3
+                ? serial.length() == 2
+                ? ("0" + serial) : ("00" + serial)
+                : serial;
     }
 
-    private static String generateSex(Sex gender) {
+    protected static String generateSex(Sex gender) {
         int genderNum = random.nextInt(0, 10);
         if (Sex.MALE.equals(gender)) {
             if (genderNum % 2 != 0) {
@@ -66,7 +76,7 @@ public class DateToPeselParser {
         }
     }
 
-    private static String generateControlNum(String year, String month, String day, String serialNum, String sex) {
+    protected static String generateControlNum(String year, String month, String day, String serialNum, String sex) {
         int y1 = Integer.parseInt(year.substring(0, 1));
         int y2 = (Integer.parseInt(year.substring(1)) * 3);
         int m1 = Integer.parseInt(month.substring(0, 1)) * 7;

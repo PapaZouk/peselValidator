@@ -12,7 +12,7 @@ public abstract class PeselGeneratorFactory implements PeselGenerator{
         if (peselType.equals(PeselGeneratorType.TWENTIETH_CENTURY)) {
             return new PeselGeneratorTwentieth();
         } else if (peselType.equals(PeselGeneratorType.TWENTY_FIRST_CENTURY)) {
-            return new PeselGeneratorMillenium();
+            return new PeselGeneratorTwentyFirstCentury();
         } else if (peselType.equals(PeselGeneratorType.NINETEENTH_CENTURY)) {
             return new PeselGeneratorNineteenthCentury();
         } else {

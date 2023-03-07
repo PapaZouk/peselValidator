@@ -1,6 +1,7 @@
-package pl.validator.services;
+package pl.validator.util;
 
 import pl.validator.enums.PeselGeneratorType;
+import pl.validator.services.DateValidator;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -42,7 +43,7 @@ public class DateGenerator {
         return generateRandomDate(1, 31, 1, 13, yearStart, yearEnd, generatorType);
     }
 
-    private static int getCentury(PeselGeneratorType generatorType) {
+    protected static int getCentury(PeselGeneratorType generatorType) {
         if (PeselGeneratorType.NINETEENTH_CENTURY.equals(generatorType)) {
             return 1800;
         } else if (PeselGeneratorType.TWENTIETH_CENTURY.equals(generatorType)) {

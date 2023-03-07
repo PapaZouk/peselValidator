@@ -2,10 +2,11 @@ package pl.validator.services;
 
 import pl.validator.enums.PeselGeneratorType;
 import pl.validator.model.Sex;
+import pl.validator.util.DateGenerator;
 
 import java.time.LocalDate;
 
-public class PeselGeneratorMillenium implements PeselGenerator {
+public class PeselGeneratorTwentyFirstCentury implements PeselGenerator {
     private static final PeselValidator validator = new PeselValidatorImpl();
     @Override
     public String generatePesel(int yearStart, int yearEnd) {
