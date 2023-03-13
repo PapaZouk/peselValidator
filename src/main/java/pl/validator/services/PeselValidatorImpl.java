@@ -5,11 +5,18 @@ import java.util.Arrays;
 public class PeselValidatorImpl implements PeselValidator{
     @Override
     public boolean validatePESEL(String peselNum) {
-        return checkPeselNumbers(getPeselNumbers(peselNum));
+        return checkControlSumNumber(getPeselNumbers(peselNum));
     }
 
     @Override
-    public boolean checkPeselNumbers(int[] numbersArray) {
+    public int[] getPeselNumbers(String peselNum) {
+        return Arrays.stream(peselNum.split(""))
+                .mapToInt(Integer::valueOf)
+                .toArray();
+    }
+
+    @Override
+    public boolean checkControlSumNumber(int[] numbersArray) {
         return calculate(numbersArray) == 0;
     }
 
@@ -29,13 +36,6 @@ public class PeselValidatorImpl implements PeselValidator{
         int c = numbersArray[10];
         int calculation = y1 + (y2 * 3 ) + (m1 * 7) + (m2 * 9) + d1 + (d2 * 3) + (s1 * 7) + (s2 * 9) + s3 + (p * 3) + c;
         return calculation % 10;
-    }
-
-    @Override
-    public int[] getPeselNumbers(String peselNum) {
-        return Arrays.stream(peselNum.split(""))
-                .mapToInt(Integer::valueOf)
-                .toArray();
     }
 
 }

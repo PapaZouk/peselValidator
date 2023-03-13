@@ -4,7 +4,7 @@ public interface PeselValidator {
 
     boolean validatePESEL(String peselNum);
 
-    boolean checkPeselNumbers(int[] numbersArray);
+    boolean checkControlSumNumber(int[] numbersArray);
 
     int calculate(int[] numbersArray);
 

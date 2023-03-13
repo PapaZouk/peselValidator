@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DateToPeselParserTest {
+class DateToValidationResultParserTest {
 
     @Test
     @DisplayName("Should parse given date to 11 digit PESEL number in form of a string")

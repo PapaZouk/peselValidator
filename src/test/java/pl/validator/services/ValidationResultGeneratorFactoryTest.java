@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pl.validator.enums.PeselGeneratorType;
 
-class PeselGeneratorFactoryTest {
+class ValidationResultGeneratorFactoryTest {
 
     @Test
     @DisplayName("Should return proper PeselGenerator class")
