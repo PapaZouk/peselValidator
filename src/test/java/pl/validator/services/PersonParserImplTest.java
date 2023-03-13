@@ -7,11 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import pl.validator.model.Sex;
+import pl.validator.model.Gender;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PersonParserImplTest {
 
@@ -97,16 +95,16 @@ class PersonParserImplTest {
         String value3 = "4";
         String value4 = "9";
 
-        Sex expected1 = Sex.MALE;
-        Sex expected2 = Sex.FEMALE;
-        Sex expected3 = Sex.FEMALE;
-        Sex expected4 = Sex.MALE;
+        Gender expected1 = Gender.MALE;
+        Gender expected2 = Gender.FEMALE;
+        Gender expected3 = Gender.FEMALE;
+        Gender expected4 = Gender.MALE;
 
         // when
-        Sex result1 = parser.getSex(value1);
-        Sex result2 = parser.getSex(value2);
-        Sex result3 = parser.getSex(value3);
-        Sex result4 = parser.getSex(value4);
+        Gender result1 = parser.getSex(value1);
+        Gender result2 = parser.getSex(value2);
+        Gender result3 = parser.getSex(value3);
+        Gender result4 = parser.getSex(value4);
 
         // then
         Assertions.assertEquals(expected1, result1);

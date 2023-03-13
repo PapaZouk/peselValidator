@@ -1,7 +1,9 @@
 package pl.validator.services;
 
+import org.springframework.stereotype.Service;
 import pl.validator.enums.PeselGeneratorType;
 
+@Service
 public abstract class PeselGeneratorFactory implements PeselGenerator{
 
     public static PeselGenerator build(PeselGeneratorType peselType) {

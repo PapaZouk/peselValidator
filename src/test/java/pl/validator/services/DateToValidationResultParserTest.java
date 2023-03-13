@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pl.validator.enums.PeselGeneratorType;
-import pl.validator.model.Sex;
+import pl.validator.model.Gender;
 
 import java.time.LocalDate;
 
@@ -33,7 +33,7 @@ class DateToValidationResultParserTest {
                 + String.valueOf(date.getMonthValue() + 80)
                 + String.valueOf(date.getDayOfMonth());
         // when
-        String result = DateToPeselParser.parseDateToPesel(date, PeselGeneratorType.NINETEENTH_CENTURY, Sex.FEMALE);
+        String result = DateToPeselParser.parseDateToPesel(date, PeselGeneratorType.NINETEENTH_CENTURY, Gender.FEMALE);
         String resultDate = result.substring(0, 6);
         // then
         Assertions.assertEquals(expectedDate, resultDate);
@@ -114,9 +114,9 @@ class DateToValidationResultParserTest {
     @DisplayName("Should generate random string value of odd number or even number with given gender type in range of 0 to 10")
     void generateSex() {
         // given
-        Sex male = Sex.MALE;
-        Sex female = Sex.FEMALE;
-        Sex unknown = Sex.UNKNOWN;
+        Gender male = Gender.MALE;
+        Gender female = Gender.FEMALE;
+        Gender unknown = Gender.UNKNOWN;
         // when
         int maleNumberResult = Integer.parseInt(DateToPeselParser.generateSex(male));
         int femaleNumberResult = Integer.parseInt(DateToPeselParser.generateSex(female));

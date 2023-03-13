@@ -22,7 +22,7 @@ public class JsonParserImpl implements JsonParser {
         body.append("\"validationStatus\": \"" + validationStatus + "\",");
         body.append("\"checksum\": \"" + checkSum + "\",");
         body.append("\"dateOfBirth\": \"" + person.getBirthday().toString() + "\",");
-        body.append("\"gender\": \"" + person.getSex().name() + "\"");
+        body.append("\"gender\": \"" + person.getGender().name() + "\"");
         body.append("}");
         return body.toString();
     }

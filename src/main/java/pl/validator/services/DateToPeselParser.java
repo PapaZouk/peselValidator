@@ -1,7 +1,7 @@
 package pl.validator.services;
 
 import pl.validator.enums.PeselGeneratorType;
-import pl.validator.model.Sex;
+import pl.validator.model.Gender;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -10,7 +10,7 @@ public class DateToPeselParser {
 
     private static final Random random = new Random();
 
-    public static String parseDateToPesel(LocalDate date, PeselGeneratorType generatorType, Sex gender) {
+    public static String parseDateToPesel(LocalDate date, PeselGeneratorType generatorType, Gender gender) {
         String year = String.valueOf(date.getYear()).substring(2);
 
         String month = getMonth(checkCentury(generatorType, date.getMonthValue()));
@@ -44,7 +44,7 @@ public class DateToPeselParser {
     }
 
     public static String parseDateToPesel(LocalDate date, PeselGeneratorType generatorType) {
-        return parseDateToPesel(date, generatorType, Sex.UNKNOWN);
+        return parseDateToPesel(date, generatorType, Gender.UNKNOWN);
     }
 
     protected static String generateSerialNum() {
@@ -55,21 +55,21 @@ public class DateToPeselParser {
                 : serial;
     }
 
-    protected static String generateSex(Sex gender) {
+    protected static String generateSex(Gender gender) {
         int genderNum = random.nextInt(0, 10);
-        if (Sex.MALE.equals(gender)) {
+        if (Gender.MALE.equals(gender)) {
             if (genderNum % 2 != 0) {
                 return String.valueOf(genderNum);
             } else {
                 return generateSex(gender);
             }
-        } else if (Sex.FEMALE.equals(gender)) {
+        } else if (Gender.FEMALE.equals(gender)) {
             if (genderNum % 2 == 0) {
                 return String.valueOf(genderNum);
             } else {
                 return generateSex(gender);
             }
-        } else if (Sex.UNKNOWN.equals(gender)) {
+        } else if (Gender.UNKNOWN.equals(gender)) {
             return String.valueOf(genderNum);
         } else {
             throw new IllegalArgumentException("Unknown gender type");

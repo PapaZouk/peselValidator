@@ -1,17 +1,44 @@
 package pl.validator.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
+@Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_person", nullable = false)
+    private Long idPerson;
 
-    private final String pesel;
-    private final LocalDate birthday;
-    private final Sex sex;
+    @Column
+    private String pesel;
+    @DateTimeFormat
+    @Column(name = "dateOfBirth")
+    private LocalDate birthday;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
 
-    public Person(String pesel, Integer year, Integer month, Integer day, Sex sex) {
+    public Long getIdPerson() {
+        return idPerson;
+    }
+
+    public void setIdPerson(Long idPerson) {
+        this.idPerson = idPerson;
+    }
+
+    public Person(String pesel, Integer year, Integer month, Integer day, Gender gender) {
         this.pesel = pesel;
         this.birthday = LocalDate.of(year, month, day);
-        this.sex = sex;
+        this.gender = gender;
     }
 
     public String getPesel() {
@@ -26,13 +53,13 @@ public class Person {
         return birthday.getDayOfWeek().name();
     }
 
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
     @Override
     public String toString() {
         return String.format("Person(birthday: %s, %s, sex: %-7s, PESEL: %s)",
-                getDayOfWeek() ,getBirthday(), getSex(), getPesel());
+                getDayOfWeek() ,getBirthday(), getGender(), getPesel());
     }
 }

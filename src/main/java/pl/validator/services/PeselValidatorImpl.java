@@ -1,7 +1,10 @@
 package pl.validator.services;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Arrays;
 
+@Service
 public class PeselValidatorImpl implements PeselValidator{
     @Override
     public boolean validatePESEL(String peselNum) {

@@ -1,6 +1,6 @@
 package pl.validator.services;
 
-import pl.validator.model.Sex;
+import pl.validator.model.Gender;
 
 public interface PeselGenerator {
 
@@ -9,7 +9,7 @@ public interface PeselGenerator {
     String generatePesel(int monthStart, int monthEnd, int yearStart, int yearEnd);
 
     String generatePesel(int dayStart, int dayEnd, int monthStart, int monthEnd, int yearStart, int yearEnd);
-    String generatePesel(int dayStart, int dayEnd, int monthStart, int monthEnd, int yearStart, int yearEnd, Sex gender);
+    String generatePesel(int dayStart, int dayEnd, int monthStart, int monthEnd, int yearStart, int yearEnd, Gender gender);
 
     String generatePeselWithRandomDateAndGender();
 
@@ -17,12 +17,12 @@ public interface PeselGenerator {
 
     String generatePeselWithRandomYearDayAndGender(int monthStart, int monthEnd);
 
-    String generatePeselWithGenderAndRandomDate(Sex sex);
+    String generatePeselWithGenderAndRandomDate(Gender gender);
 
-    String generatePeselWithYearAndGender(int yearStart, int yearEnd, Sex sex);
+    String generatePeselWithYearAndGender(int yearStart, int yearEnd, Gender gender);
 
-    String generatePeselWithMonthAndGender(int monthStart, int monthEnd, Sex sex);
+    String generatePeselWithMonthAndGender(int monthStart, int monthEnd, Gender gender);
 
-    String generatePeselWithDayAndGender(int dayStart, int dayEnd, Sex sex);
+    String generatePeselWithDayAndGender(int dayStart, int dayEnd, Gender gender);
 
 }
