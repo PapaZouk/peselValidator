@@ -2,11 +2,8 @@ package pl.validator.controler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.validator.model.Person;
 import pl.validator.repository.PeselRepository;
 import pl.validator.services.PeselGeneratorTwentieth;
-
-import java.util.List;
 
 @RestController
 public class PeselController {

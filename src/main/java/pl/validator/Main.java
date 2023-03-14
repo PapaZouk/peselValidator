@@ -2,6 +2,7 @@ package pl.validator;
 
 import pl.validator.enums.PeselGeneratorType;
 import pl.validator.model.ValidationResult;
+import pl.validator.repository.ValidationResultRepository;
 import pl.validator.services.*;
 
 public class Main {
@@ -19,6 +20,7 @@ public class Main {
         String path = "G:\\Java\\PESELvalidator\\src\\main\\java\\pl\\validator\\jsonFiles\\generatedJsonFile.json";
         ValidationResult validationResult = jsonReadingService.readJsonPesel(path);
         System.out.println(validationResult);
+
     }
 
 }

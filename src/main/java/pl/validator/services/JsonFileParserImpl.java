@@ -1,5 +1,6 @@
 package pl.validator.services;
 
+import org.springframework.stereotype.Service;
 import pl.validator.model.ValidationResult;
 
 import java.io.BufferedReader;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+@Service
 public class JsonFileParserImpl implements JsonFileParser{
     @Override
     public ValidationResult parseJsonFile(Path path) {

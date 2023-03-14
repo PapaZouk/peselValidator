@@ -1,5 +1,6 @@
 package pl.validator.services;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import pl.validator.enums.PeselGeneratorType;
 import pl.validator.model.Gender;
@@ -8,6 +9,7 @@ import pl.validator.util.DateGenerator;
 import java.time.LocalDate;
 
 @Service
+@Primary
 public class PeselGeneratorTwentieth implements PeselGenerator {
 
     private static final PeselValidator validator = new PeselValidatorImpl();
